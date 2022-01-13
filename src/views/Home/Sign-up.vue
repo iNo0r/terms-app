@@ -4,16 +4,16 @@
       <div>Sign Up</div>
       <div>
         <label for="email">Email</label>
-        <input type="text" id="email" />
+        <input v-model="email" type="text" id="email" />
       </div>
       <div>
         <div>
           <label for="password">Password</label>
           <!-- <div>Forgot ?</div> -->
         </div>
-        <input type="password" id="password" />
+        <input v-model="password" type="password" id="password" />
       </div>
-      <div>Sign up</div>
+      <div @click="signUp">Sign up</div>
       <div>
         <div>already a member ?</div>
         <div>sign in now</div>
@@ -172,7 +172,25 @@
     </div>
   </div>
 </template>
-
+<script>
+export default {
+  data() {
+    return {
+      email: "user@user.com",
+      password: "12345678",
+    };
+  },
+  methods: {
+    signUp() {
+      let data = {
+        email: this.email,
+        password: this.password,
+      };
+      this.$store.dispatch("signUp", data);
+    },
+  },
+};
+</script>
 <style lang="scss" scoped>
 #sign-in-c {
   display: flex;

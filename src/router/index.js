@@ -21,12 +21,18 @@ import Signin from '../views/Home/Sign-in.vue'
 
 
 
+//to check auth -- under dev
+import firebase from '../firebase/firebase'
+
 
 
 const routes = [
   {
     path: '/exp',
     component: Experiment,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/signup',
@@ -41,7 +47,11 @@ const routes = [
   {
     path: '/',
     component: Home,
-    name: "Home"
+    name: "Home",
+    meta: {
+      requiresAuth: true
+    }
+
   },
   {
     path: '/document',
@@ -54,44 +64,75 @@ const routes = [
         name: "documentList",
         props: true
       }
-    ]
+    ],
+    meta: {
+      requiresAuth: true
+    }
 
   },
   {
     path: "/_document",
     component: _Document,
-    name: 'document'
+    name: 'document',
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/_document/list',
     component: List,
     name: 'list',
-    props: true
+    props: true,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/learn',
     name: 'Learn',
     component: Learn,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/learn/method',
     name: 'learning-method',
     component: LearningMethod,
-    props: true
+    props: true,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/learn/method/meaning-term',
     name: 'meaningTerm',
     component: MeaningTerm,
-    props: true
+    props: true,
+    meta: {
+      requiresAuth: true
+    }
   }
 ]
+
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
 })
 
+router.beforeEach(async (to, from, next) => {
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+  let currentUser = await firebase.getCurrentUser();
+  if (requiresAuth) {
+    if (currentUser) {
+      return next()
+    } else {
+      return next('/signin')
+    }
 
+  }
+  next()
+})
 
 export default router

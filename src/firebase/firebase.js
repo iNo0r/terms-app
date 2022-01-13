@@ -49,12 +49,49 @@ async function editList(listId, editedList) {
 //     return await updateDoc(docRef, editedList)
 // }
 
+// auth methods - under dev 
 
+async function SignUp(userEmail, userPassword) {
+    console.log('reached')
+    return createUserWithEmailAndPassword(auth, userEmail, userPassword)
+        .then((userCredential) => {
+            // Signed in 
+            // console.log(auth)
+            // const user = userCredential.user;
+            // UserUid = user.uid
+            // setDoc(doc(firestore, `users/${UserUid}`), {}, { merge: true })
+            // addDoc(collection(firestore, 'lists'), { creator: userUid })
+            // console.log('signed')
+            return userCredential
+            // ...
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // console.log("Sign up Error : ", errorMessage)
+            return error
+            // ..
+        });
+}
+async function SignIn(userEmail, userPassword) {
+    signInWithEmailAndPassword(auth, userEmail, userPassword)
+    console.log(auth.currentUser)
+}
+let getCurrentUser = () => {
+    return new Promise((resolve, reject) => {
+        onAuthStateChanged(auth, user => {
+            resolve(user);
+        }, reject);
+    })
+};
 
 export default {
     getAllDocs,
     addList,
     deleteList,
     editList,
+    SignUp,
+    SignIn,
+    getCurrentUser
 }
 

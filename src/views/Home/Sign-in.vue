@@ -166,7 +166,7 @@
           <label for="password">Password</label>
           <div>Forgot ?</div>
         </div>
-        <input type="password" id="password" />
+        <input @click="signIn" type="password" id="password" />
       </div>
       <div>Sign in</div>
       <div>
@@ -176,7 +176,25 @@
     </div>
   </div>
 </template>
-
+<script>
+export default {
+  data() {
+    return {
+      email: "user@user.com",
+      password: "12345678",
+    };
+  },
+  methods: {
+    signIn() {
+      let data = {
+        email: this.email,
+        password: this.password,
+      };
+      this.$store.dispatch("signIn", data);
+    },
+  },
+};
+</script>
 <style lang="scss" scoped>
 #sign-in-c {
   display: flex;
