@@ -244,11 +244,8 @@
 
 
 <script>
-import ListTable from "../components/_Document/Lists-table.vue";
 export default {
-  components: {
-    ListTable,
-  },
+  components: {},
 };
 </script>
 
