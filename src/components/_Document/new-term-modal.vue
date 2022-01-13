@@ -274,9 +274,9 @@ export default {
   //   color: #bd2828;
 }
 
-#condtionally-visible {
-  //   z-index: 99;
-}
+// #condtionally-visible {
+//   //   z-index: 99;
+// }
 #main-oc {
   position: fixed;
   height: 100%;
