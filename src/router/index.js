@@ -16,10 +16,27 @@ import MeaningTerm from '../views/Learn/LearningMethods/Meaning-term.vue'
 
 import documentList from '../components/Document/List.vue'
 
+import Signup from '../views/Home/Sign-up.vue'
+import Signin from '../views/Home/Sign-in.vue'
+
+
+
+
+
 const routes = [
   {
     path: '/exp',
-    component: Experiment
+    component: Experiment,
+  },
+  {
+    path: '/signup',
+    component: Signup,
+    name: "signup"
+  },
+  {
+    path: '/signin',
+    component: Signin,
+    name: "signin"
   },
   {
     path: '/',
