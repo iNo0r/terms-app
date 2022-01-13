@@ -1,26 +1,29 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <Layout>
+    <template v-slot:app-title> TERMA </template>
+    <template v-slot:breadcrumbs>
+      <Breadcrumbs />
+    </template>
+    <template v-slot:app-content>
+      <router-view />
+    </template>
+  </Layout>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Layout from "./components/reuse/layout.vue";
+import Breadcrumbs from "./components/reuse/breadcrumbs.vue";
 
 export default {
-  name: 'App',
   components: {
-    HelloWorld
-  }
-}
+    Layout,
+    Breadcrumbs,
+  },
+  data() {
+    return {};
+  },
+  methods: {},
+};
 </script>
-
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
