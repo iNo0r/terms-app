@@ -52,6 +52,7 @@ export default createStore({
     async loadData(context) {
       // console.log("loading...")
       let data = await firebase.getAllDocs()
+      console.log('data loaded')
       context.commit("updateState", data)
     },
     // will take care of updating both state and loclaStorage 
@@ -75,9 +76,7 @@ export default createStore({
     async editList(context, data) {
 
       let listId = data._listId
-      // let list = data.list
       await firebase.editList(listId, data)
-      // console.log("done")
       await context.dispatch('loadData')
 
     },

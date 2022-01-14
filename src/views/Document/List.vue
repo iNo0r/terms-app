@@ -1,5 +1,5 @@
 <template>
-  <div id="main-c">
+  <div id="main-c" v-if="isList">
     <div id="lists-c">
       <div id="side-content">
         <div id="raw-1">
@@ -116,9 +116,8 @@ export default {
     EditTermModal,
   },
   props: {
-    choosenList: {
-      required: true,
-    },
+    choosenList: {},
+    listIndex: {},
   },
   data() {
     return {
@@ -130,11 +129,31 @@ export default {
     };
   },
   computed: {
+    isList() {
+      if (this.list) {
+        return true;
+      } else {
+        return false;
+      }
+    },
     lists() {
       return this.$store.getters["termsLists"];
     },
     list() {
-      return JSON.parse(this.choosenList);
+      if (this.listIndex) {
+        localStorage.setItem("listIndex", this.listIndex);
+        return this.lists[this.listIndex];
+      } else {
+        let storgedIndex = localStorage.getItem("listIndex");
+        return this.lists[storgedIndex];
+      }
+      // if (this.choosenList) {
+      //   localStorage.setItem("choosenList", this.choosenList);
+      //   return JSON.parse(this.choosenList);
+      // } else {
+      //   let storgedchoosenList = localStorage.getItem("choosenList");
+      //   return JSON.parse(storgedchoosenList);
+      // }
     },
     terms() {
       try {
@@ -165,14 +184,8 @@ export default {
       this.$store.dispatch("editList", updatedList);
     },
   },
-  created() {
-    this.checkListsEmpty();
-    console.log("created", this.lists);
-  },
-  mounted() {
-    // this.checkListsEmpty();
-    // console.log(this.$route.params);
-  },
+  created() {},
+  mounted() {},
   updated() {},
 };
 </script>

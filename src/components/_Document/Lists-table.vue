@@ -11,7 +11,7 @@
       >
         <div
           class="list-name"
-          @click="setChoosenList(list)"
+          @click="setChoosenList(list, index)"
           :class="{ choosenList: choosenListIndex === index }"
         >
           {{ list.listName }}
@@ -34,6 +34,7 @@
 
 
 <script>
+import { concat } from "lodash";
 import NewListModal from "./new-list-modal.vue";
 export default {
   components: {
@@ -92,6 +93,7 @@ export default {
         name: "list",
         params: {
           choosenList: JSON.stringify(choosenList),
+          listIndex: index,
         },
       });
     },

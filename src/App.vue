@@ -28,8 +28,9 @@ export default {
     return {};
   },
   methods: {},
-  created() {
-    this.$store.dispatch("setIsAuth");
+  async created() {
+    await this.$store.dispatch("loadData");
+    await this.$store.dispatch("setIsAuth");
   },
 };
 </script>

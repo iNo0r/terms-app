@@ -9,8 +9,6 @@ export default {
   components: {
     Nav,
   },
-  created() {
-    this.$store.dispatch("loadData");
-  },
+  created() {},
 };
 </script>
