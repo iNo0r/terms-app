@@ -9,7 +9,8 @@ import Term from '../Constructors/Term'
 
 export default createStore({
   state: {
-    termsLists: []
+    termsLists: [],
+    isAuth: false
   },
   getters: {
     termsLists(state) {
@@ -19,7 +20,11 @@ export default createStore({
 
       // this.termsLists.length > 0;
 
+    },
+    isAuth(state) {
+      return state.isAuth
     }
+
   },
   mutations: {
     // initData() {
@@ -35,6 +40,9 @@ export default createStore({
     updateState(state, data) {
       state.termsLists = data
     },
+    setIsAuth(state, data) {
+      state.isAuth = data
+    }
 
 
   },
@@ -73,17 +81,32 @@ export default createStore({
       await context.dispatch('loadData')
 
     },
+
     //under development
-    signUp(context, data) {
+    async setIsAuth(context, data) {
+      let isAuth = await firebase.getCurrentUser()
+      context.commit('setIsAuth', isAuth)
+    },
+
+
+    async signUp(context, data) {
       let email = data.email
       let password = data.password
       firebase.SignUp(email, password)
+      await context.dispatch("setIsAuth")
     },
-    signIn(context, data) {
+    async signIn(context, data) {
       let email = data.email
       let password = data.password
-      firebase.SignIn(email, password)
+      console.log(data)
+      await firebase.SignIn(email, password)
+      await context.dispatch("setIsAuth")
     },
+    async logOut(context) {
+      await firebase.LogOut()
+      await context.dispatch("setIsAuth")
+
+    }
 
   },
   modules: {

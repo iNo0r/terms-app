@@ -10,12 +10,16 @@
       <div>
         <slot name="breadcrumbs"> </slot>
       </div>
+      <div id="user-section">
+        <slot name="user-section"> </slot>
+      </div>
     </div>
     <div id="content-section">
       <slot name="app-content"> </slot>
     </div>
   </div>
 </template>
+
 
 
 
@@ -53,7 +57,10 @@ body {
   // background: greenyellow;
   display: flex;
   align-items: flex-end;
+  font-family: poppins;
+
   gap: 3%;
+  // background: rgb(76, 121, 32);
   #app-title {
     // background: red;
     font-family: Raleway;
@@ -68,6 +75,11 @@ body {
       color: inherit;
       text-decoration: none;
     }
+  }
+  #user-section {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
   }
 }
 

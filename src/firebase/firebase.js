@@ -74,16 +74,29 @@ async function SignUp(userEmail, userPassword) {
         });
 }
 async function SignIn(userEmail, userPassword) {
-    signInWithEmailAndPassword(auth, userEmail, userPassword)
-    console.log(auth.currentUser)
+    await signInWithEmailAndPassword(auth, userEmail, userPassword)
+
 }
 let getCurrentUser = () => {
     return new Promise((resolve, reject) => {
         onAuthStateChanged(auth, user => {
-            resolve(user);
+            if (user) {
+                resolve(true)
+            } else {
+                resolve(false)
+            }
         }, reject);
     })
 };
+
+async function LogOut() {
+    await signOut(auth).then(() => {
+        console.log('signed out successfully')
+    }).catch((error) => {
+        console.log('could not sign out')
+        // An error happened.
+    });
+}
 
 export default {
     getAllDocs,
@@ -92,6 +105,7 @@ export default {
     editList,
     SignUp,
     SignIn,
-    getCurrentUser
+    getCurrentUser,
+    LogOut
 }
 

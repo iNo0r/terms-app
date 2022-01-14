@@ -6,7 +6,7 @@
         enrich your knowledge with our innovative
         <span style="color: #aafeae">Flashcards</span>
       </div>
-      <div>Join now !</div>
+      <div @click="$router.push('/signup')">Join now !</div>
       <div>
         <div>
           <div>

@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
+import Dashboard from '../views/Dashboard.vue'
 import Document from '../views/Document.vue'
 import _Document from '../views/_Document.vue'
 import List from '../views/Document/List.vue'
@@ -11,13 +11,12 @@ import LearningMethod from '../views/Learn/Learning-method.vue'
 // learning methods
 import MeaningTerm from '../views/Learn/LearningMethods/Meaning-term.vue'
 
-
-
-
 import documentList from '../components/Document/List.vue'
 
-import Signup from '../views/Home/Sign-up.vue'
-import Signin from '../views/Home/Sign-in.vue'
+
+import Landing from '../views/Landing.vue'
+import Signup from '../views/landing/Sign-up.vue'
+import Signin from '../views/landing/Sign-in.vue'
 
 
 
@@ -46,13 +45,20 @@ const routes = [
   },
   {
     path: '/',
-    component: Home,
-    name: "Home",
+    component: Landing,
+    name: "landing",
+
+  },
+  {
+    path: '/dashboard',
+    component: Dashboard,
+    name: "dashboard",
     meta: {
       requiresAuth: true
     }
 
   },
+
   {
     path: '/document',
     // name: 'Document',
@@ -124,6 +130,10 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
   let currentUser = await firebase.getCurrentUser();
+  let fullPath = to.fullPath
+  if ((fullPath === "/" || fullPath === "/signup" || fullPath === "/signin") && currentUser) {
+    return next('/dashboard')
+  }
   if (requiresAuth) {
     if (currentUser) {
       return next()

@@ -16,7 +16,7 @@
       <div @click="signUp">Sign up</div>
       <div>
         <div>already a member ?</div>
-        <div>sign in now</div>
+        <div @click="$router.push('/signin')">sign in now</div>
       </div>
     </div>
     <div>

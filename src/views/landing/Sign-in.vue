@@ -159,19 +159,19 @@
       <div>Sign In</div>
       <div>
         <label for="email">Email</label>
-        <input type="text" id="email" />
+        <input v-model="email" type="text" id="email" />
       </div>
       <div>
         <div>
           <label for="password">Password</label>
           <div>Forgot ?</div>
         </div>
-        <input @click="signIn" type="password" id="password" />
+        <input v-model="password" type="password" id="password" />
       </div>
-      <div>Sign in</div>
+      <div @click="signIn">Sign in</div>
       <div>
         <div>Not a member ?</div>
-        <div>sign up now</div>
+        <div @click="$router.push('/signup')">sign up now</div>
       </div>
     </div>
   </div>
@@ -185,12 +185,13 @@ export default {
     };
   },
   methods: {
-    signIn() {
+    async signIn() {
       let data = {
         email: this.email,
         password: this.password,
       };
-      this.$store.dispatch("signIn", data);
+      await this.$store.dispatch("signIn", data);
+      this.$router.push("/dashboard");
     },
   },
 };
