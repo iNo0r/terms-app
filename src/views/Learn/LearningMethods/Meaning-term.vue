@@ -99,7 +99,7 @@
 import _ from "lodash";
 
 import IconEdit from "../../../components/reuse/icon-edit.vue";
-import EditTermModal from "../../../components/_Document/edit-term-modal.vue";
+import EditTermModal from "../../../components/Document/edit-term-modal.vue";
 export default {
   components: {
     IconEdit,

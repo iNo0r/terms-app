@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Dashboard from '../views/Dashboard.vue'
 import Document from '../views/Document.vue'
-import _Document from '../views/_Document.vue'
 import List from '../views/Document/List.vue'
 import Experiment from '../views/experiment.vue'
 
@@ -11,7 +10,6 @@ import LearningMethod from '../views/Learn/Learning-method.vue'
 // learning methods
 import MeaningTerm from '../views/Learn/LearningMethods/Meaning-term.vue'
 
-import documentList from '../components/Document/List.vue'
 
 
 import Landing from '../views/Landing.vue'
@@ -59,26 +57,10 @@ const routes = [
 
   },
 
-  {
-    path: '/document',
-    // name: 'Document',
-    component: Document,
-    children: [
-      {
-        path: ':listIndex',
-        component: documentList,
-        name: "documentList",
-        props: true
-      }
-    ],
-    meta: {
-      requiresAuth: true
-    }
 
-  },
   {
     path: "/_document",
-    component: _Document,
+    component: Document,
     name: 'document',
     meta: {
       requiresAuth: true

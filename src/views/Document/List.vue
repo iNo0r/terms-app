@@ -102,10 +102,10 @@
 import IconEdit from "../../components/reuse/icon-edit.vue";
 import IconDelete from "../../components/reuse/icon-delete.vue";
 
-import ListTable from "../../components/_Document/Lists-table.vue";
-import NewTermModal from "../../components/_Document/new-term-modal.vue";
-import EditTermModal from "../../components/_Document/edit-term-modal.vue";
-import EditListModal from "../../components/_Document/edit-list-modal.vue";
+import ListTable from "../../components/Document/Lists-table.vue";
+import NewTermModal from "../../components/Document/new-term-modal.vue";
+import EditTermModal from "../../components/Document/edit-term-modal.vue";
+import EditListModal from "../../components/Document/edit-list-modal.vue";
 export default {
   components: {
     IconEdit,
